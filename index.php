@@ -94,8 +94,8 @@
 
 	<script src="assets/js/libs/jquery-1.7.2.min.js"></script>
 	<script src="assets/js/libs/underscore-min.js"></script>
-	// <script src="assets/js/libs/underscore.math.js"></script>
-	// <script src="assets/js/libs/underscore.deferred.js"></script>
+	<script src="assets/js/libs/underscore.math.js"></script>
+	<script src="assets/js/libs/underscore.deferred.js"></script>
 	<script src="assets/js/libs/moment.js"></script>
 	<script src="assets/js/libs/miso.ds.0.2.1.js"></script>
 	
