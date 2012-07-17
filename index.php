@@ -98,6 +98,7 @@
 	<script src="assets/js/libs/underscore.deferred.js"></script>
 	<script src="assets/js/libs/moment.js"></script>
 	<script src="assets/js/libs/miso.ds.0.2.1.js"></script>
+	<script src="assets/js/libs/d3.v2.js"></script>
 	
 	<script src="assets/js/script.js"></script>
 	

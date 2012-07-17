@@ -1,7 +1,30 @@
 $(function () {
 
+	var csvUrl = "activities.all.csv",
+		rows = [],
+		csv;
+
+	// D3 STUFF
+
+	d3.csv(csvUrl, function (parsedRows) {
+		rows = parsedRows;
+		// console.log(rows[0]);
+	});
+
+	$.get(csvUrl, function (data) {
+		csv = data;
+		var rows = d3.csv.parseRows(csv);
+		$.each(rows, function (i, row) {
+			console.log(row);
+		});
+	});
+
+
+	// MISO DATASET STUFF
+
 	// Load running CSV's
 	//
+	/*
 	var ds = new Miso.Dataset({
 		url : "/activities.all.csv",
 		delimiter : ";",
@@ -99,21 +122,22 @@ $(function () {
 			// console.log(this.sum('Distance'));
 
 			// this.sum('Distance').bind('change', function () {
-			// 	console.log('The sum has changed to: ' + this.sum());
+			//	console.log('The sum has changed to: ' + this.sum());
 			// });
 
 			// var maxDist = this.max('Distance');
 			
 			// var row = this.where({
-			// 	column: 'Distance',
-			// 	rows: function (row) {
-			// 		return row.Distance == maxDist;
-			// 	}
+			//	column: 'Distance',
+			//	rows: function (row) {
+			//		return row.Distance == maxDist;
+			//	}
 			// });
 			console.log(this.rows());
 			
 		}
 	});
+	*/
 
 	
 }());
