@@ -1,30 +1,84 @@
+(function (A, $) {
+
+	A = A || {};
+
+	Object.prototype.combine = function(_args){
+		for(var i in this) {
+			if(typeof _args[i] == "undefined") {
+				_args[i] = this[i];
+			}
+		}
+	};
+
+
+	A.Run = function (params) {
+		
+		params = params || {};
+		
+		// default values
+		// var o = {
+		// 	favourite: false,
+		// 	name: 'no name',
+		// 	activity: '',
+		// 	course: '',
+		// 	date: null,
+		// 	duration: null,
+		// 	distance: null,
+		// 	elevationGain: null,
+		// 	averagePace: null,
+		// 	maxPace: null,
+		// 	calories: null
+		// };
+
+		// o.combine(params);
+		// console.log(o);
+
+		var runNode = $('<article>'),
+			nameNode = $('<h1>'),
+			dateNode = $('<time>');
+
+		dateNode.html(params.date.toString());
+		nameNode.html(params.name);
+
+		runNode.append(nameNode, dateNode);
+
+		this.el = runNode;
+
+		return this;
+
+	};
+
+	return A;
+
+
+}(A, $));
+
 $(function () {
 
 	var csvUrl = "activities.all.csv",
 		rows = [],
-		csv;
+		csv,
+		dataLocation = $('#data');
 
 	// D3 STUFF
 
-	d3.csv(csvUrl, function (parsedRows) {
-		rows = parsedRows;
-		// console.log(rows[0]);
-	});
+	// $.get(csvUrl, function (data) {
+	// 	csv = data;
+	// 	var rows = d3.csv.parseRows(csv);
+	// 	$.each(rows, function (i, row) {
+	// 		// console.log(row);
 
-	$.get(csvUrl, function (data) {
-		csv = data;
-		var rows = d3.csv.parseRows(csv);
-		$.each(rows, function (i, row) {
-			console.log(row);
-		});
-	});
+	// 	});
+	// });
+
+
+
 
 
 	// MISO DATASET STUFF
 
 	// Load running CSV's
 	//
-	/*
 	var ds = new Miso.Dataset({
 		url : "/activities.all.csv",
 		delimiter : ";",
@@ -108,36 +162,15 @@ $(function () {
 
 	ds.fetch({
 		success: function() {
+			var rows = this.rows(function (row) {
+				console.log(row);
+				var run = new A.Run(row);
 
-			var columnNames = this.columnNames(),
-				rows = this.length,
-				data = this,
-				col;
+				dataLocation.append(run.el);
 
-			columnNames.forEach(function (el, i) {
-				col = data.column(el);
-				console.log(col.name + ' - ' + col.type);
 			});
-
-			// console.log(this.sum('Distance'));
-
-			// this.sum('Distance').bind('change', function () {
-			//	console.log('The sum has changed to: ' + this.sum());
-			// });
-
-			// var maxDist = this.max('Distance');
-			
-			// var row = this.where({
-			//	column: 'Distance',
-			//	rows: function (row) {
-			//		return row.Distance == maxDist;
-			//	}
-			// });
-			console.log(this.rows());
-			
+			// console.log(dataLocation);
 		}
 	});
-	*/
-
 	
 }());

@@ -67,9 +67,7 @@
 			
 		<section id="content" role="main">
 			
-			<article>
-				
-			</article>
+			<section id="data"></section>
 				
 		</section> <!-- #content -->
 		
@@ -83,7 +81,7 @@
 		/*
 		 * Init global object (for creating base_url methods, etc.)
 		 */
-		var Site = {
+		var A = {
 			basePath: "<?php echo $_SERVER['HTTP_HOST']; ?>"
 		};
 
