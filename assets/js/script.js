@@ -11,36 +11,44 @@
 	};
 
 
-	A.Run = function (params) {
+	A.Run = function (run) {
 		
-		params = params || {};
+		run = run || {};
 		
 		// default values
-		// var o = {
-		// 	favourite: false,
-		// 	name: 'no name',
-		// 	activity: '',
-		// 	course: '',
-		// 	date: null,
-		// 	duration: null,
-		// 	distance: null,
-		// 	elevationGain: null,
-		// 	averagePace: null,
-		// 	maxPace: null,
-		// 	calories: null
-		// };
+		var defaults = {
+			favourite: false,
+			name: 'no name',
+			activity: '',
+			course: '',
+			date: false,
+			duration: null,
+			distance: null,
+			elevationGain: null,
+			averagePace: null,
+			maxPace: null,
+			calories: null
+		};
 
-		// o.combine(params);
-		// console.log(o);
+		// merging our default values
+		// defaults.combine(run);
 
-		var runNode = $('<article>'),
-			nameNode = $('<h1>'),
-			dateNode = $('<time>');
+		// pre-processing of data before we serve it up to some nodes
+		var dateString = run.date ? run.date.toString() : 'no date';
 
-		dateNode.html(params.date.toString());
-		nameNode.html(params.name);
+		// creating our dDOM nodes
+		var runNode = $('<article>').addClass('run'),
+			nameNode = $('<h1>').addClass('run-name').html(run.name),
+			favouriteNode = $('<span>').addClass('run-favourite').addClass(run.favourite).html( (run.favourite == 'true') ? '&#9733;' : '&#9734;' ),
+			dateNode = $('<time>').addClass('run-date').html(dateString),
+			durationNode = $('<time>').addClass('run-duration').html(run.duration.seconds).attr('title', run.duration.raw);
+			distanceNode = $('<span>').addClass('run-distance').html(run.distance),
+			avgPaceNode = $('<span>').addClass('run-avgpace').html(run.averagePace),
+			maxPaceNode = $('<span>').addClass('run-maxpace').html(run.maxPace),
+			elevationGainNode = $('<span>').addClass('run-elevation-gain').html(run.elevationGain),
+			caloriesNode = $('<span>').addClass('run-calories').html(run.calories);
 
-		runNode.append(nameNode, dateNode);
+		runNode.append(nameNode, favouriteNode, dateNode, durationNode, distanceNode, avgPaceNode, maxPaceNode, elevationGainNode, caloriesNode);
 
 		this.el = runNode;
 
@@ -85,7 +93,10 @@ $(function () {
 		columns: [
 			{
 				name: 'favourite',
-				type: 'string'
+				type: 'string',
+				before: function (value) {
+					return value.trim();
+				}
 			},
 			{
 				name: 'name',
@@ -108,12 +119,16 @@ $(function () {
 			},
 			{
 				name: 'duration',
-				type: 'number',
+				type: 'mixed',
 				before: function (duration) {
 
-					var result = null;
+					var result = {
+						raw: null,
+						seconds: null
+					};
 
 					if (duration) {
+
 						var hms = duration.split(':'),
 							units = hms.length,
 							seconds = 0;
@@ -128,8 +143,10 @@ $(function () {
 							seconds = (hms[0] * 60) + hms[1];
 						}
 
-						result = seconds;
+						result.raw = duration;
+						result.seconds = seconds;
 					}
+
 					return result;
 				}
 			},
@@ -138,15 +155,15 @@ $(function () {
 				type: 'number'
 			},
 			{
-				name: 'elevation gain',
+				name: 'elevationGain',
 				type: 'number'
 			},
 			{
-				name: 'average pace',
+				name: 'averagePace',
 				type: 'mixed'
 			},
 			{
-				name: 'max pace',
+				name: 'maxPace',
 				type: 'mixed'
 			},
 			{
@@ -163,9 +180,7 @@ $(function () {
 	ds.fetch({
 		success: function() {
 			var rows = this.rows(function (row) {
-				console.log(row);
 				var run = new A.Run(row);
-
 				dataLocation.append(run.el);
 
 			});
