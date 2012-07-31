@@ -1,7 +1,7 @@
 "favourite";"name";"activity";"course";"date";"duration";"distance";"elevationGain";"averagePace";"maxPace";"calories"
 " false";"Run home from work";"Running";;"Thu, 28 Jun 2012 18:16";"1:32:19";15.83;194;"5:50";"2:43";"1,335"
 " false";"Run to work";"Running";;"Thu, 28 Jun 2012 6:15";"2:06:02";22.02;183;"5:44";"3:09";"1,860"
-" false";"Barefoot Run";"Running";;"Wed, 27 Jun 2012 4:45";"54:30";9.73;41;"5:36";"3:51";811
+" true";"Barefoot Run";"Running";;"Wed, 27 Jun 2012 4:45";"54:30";9.73;41;"5:36";"3:51";811
 " false";"Untitled";"Running";;"Tue, 26 Jun 2012 6:16";"2:05:35";22.14;162;"5:40";"2:06";"1,872"
 " false";"Untitled";"Running";;"Sun, 24 Jun 2012 11:38";"59:44";10.53;49;"5:40";"2:54";885
 " false";"Quick 30KM";"Running";"Quick 30KM";"Sat, 23 Jun 2012 5:50";"3:00:00";31.5;345;"5:43";;

@@ -38,17 +38,20 @@
 
 		// creating our dDOM nodes
 		var runNode = $('<article>').addClass('run'),
+			innerNode = $('<div>').addClass('run-details'),
+			markerNode = $('<div>').addClass('marker'),
 			nameNode = $('<h1>').addClass('run-name').html(run.name),
 			favouriteNode = $('<span>').addClass('run-favourite').addClass(run.favourite).html( (run.favourite == 'true') ? '&#9733;' : '&#9734;' ),
 			dateNode = $('<time>').addClass('run-date').html(dateString),
 			durationNode = $('<time>').addClass('run-duration').html(run.duration.seconds).attr('title', run.duration.raw);
 			distanceNode = $('<span>').addClass('run-distance').html(run.distance),
-			avgPaceNode = $('<span>').addClass('run-avgpace').html(run.averagePace),
-			maxPaceNode = $('<span>').addClass('run-maxpace').html(run.maxPace),
+			avgPaceNode = $('<time>').addClass('run-avgpace').html(run.averagePace),
+			maxPaceNode = $('<time>').addClass('run-maxpace').html(run.maxPace),
 			elevationGainNode = $('<span>').addClass('run-elevation-gain').html(run.elevationGain),
 			caloriesNode = $('<span>').addClass('run-calories').html(run.calories);
 
-		runNode.append(nameNode, favouriteNode, dateNode, durationNode, distanceNode, avgPaceNode, maxPaceNode, elevationGainNode, caloriesNode);
+		innerNode.append(nameNode, favouriteNode, dateNode, durationNode, distanceNode, avgPaceNode, maxPaceNode, elevationGainNode, caloriesNode);
+		runNode.append(markerNode, innerNode);
 
 		this.el = runNode;
 
