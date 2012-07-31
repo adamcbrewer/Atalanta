@@ -35,6 +35,8 @@
 
 		// pre-processing of data before we serve it up to some nodes
 		var dateString = run.date ? run.date.toString() : 'no date';
+		
+		// console.log(run.date.unix());
 
 		// creating our dDOM nodes
 		var runNode = $('<article>').addClass('run'),
@@ -59,6 +61,32 @@
 
 	};
 
+
+	A.Grid = function () {
+
+		// Private methods
+		var now;
+
+		// Public methods
+		var pub = {
+			initTime: function () {
+				var d = new Date(),
+					t = d.getTime();
+				now = Math.ceil(t/1000);
+			},
+			getTime: function () {
+				return now;
+			}
+		};
+
+		pub.initTime();
+
+		// Returning only an instance of stuff we want public
+		return pub;
+
+	};
+
+
 	return A;
 
 
@@ -70,19 +98,6 @@ $(function () {
 		rows = [],
 		csv,
 		dataLocation = $('#data');
-
-	// D3 STUFF
-
-	// $.get(csvUrl, function (data) {
-	// 	csv = data;
-	// 	var rows = d3.csv.parseRows(csv);
-	// 	$.each(rows, function (i, row) {
-	// 		// console.log(row);
-
-	// 	});
-	// });
-
-
 
 
 
@@ -182,12 +197,20 @@ $(function () {
 
 	ds.fetch({
 		success: function() {
+
 			var rows = this.rows(function (row) {
 				var run = new A.Run(row);
 				dataLocation.append(run.el);
 
 			});
-			// console.log(dataLocation);
+
+			A.grid = new A.Grid();
+			var time = A.grid.getTime();
+			console.log(time);
+
+			// TODO: I need the oldest date when parsing the rows
+
+
 		}
 	});
 	

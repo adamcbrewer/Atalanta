@@ -66,8 +66,12 @@
 		</header> <!-- #header -->
 			
 		<section id="content" role="main">
-			
-			<section id="data"></section>
+
+			<section id="cartesian">
+
+				<section id="data"></section>
+
+			</section>
 				
 		</section> <!-- #content -->
 		
