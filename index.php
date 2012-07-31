@@ -57,14 +57,6 @@
 
 	<div id="wrapper">
 			
-		<header id="header">
-			
-			<nav id="navigation" role="navigation">
-				
-			</nav> <!-- #navigation -->
-			
-		</header> <!-- #header -->
-			
 		<section id="content" role="main">
 
 			<section id="cartesian">
@@ -74,10 +66,6 @@
 			</section>
 				
 		</section> <!-- #content -->
-		
-		<footer id="footer">
-			
-		</footer> <!-- #footer -->
 			
 	</div> <!-- #wrapper -->
 	
